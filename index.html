@@ -32,17 +32,34 @@ body {
 </div>
 <script>
 var video = document.querySelector("#videoElement");
-
-
-if (navigator.mediaDevices.getUserMedia) {       
-	navigator.mediaDevices.getUserMedia({video: true})
-  .then(function(stream) {
-    video.srcObject = stream;
-  })
-  .catch(function(err0r) {
-    console.log("Something went wrong!");
-  });
+const mediaConfig = {
+    audio: false,
+    video: {
+        width: 1920,
+        height: 1200,
+        facingMode: 'environment'
+    }
+  };
+// Put video listeners into place
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia(mediaConfig).then(function (stream) {
+        video.srcObject = stream
+        //setTimeout(function () {
+        //    video.play()
+        //    cameraOn = 1
+        //}, 1000)
+    }, errBack)
 }
+
+//if (navigator.mediaDevices.getUserMedia) {       
+//	navigator.mediaDevices.getUserMedia({video: true})
+//  .then(function(stream) {
+//    video.srcObject = stream;
+//  })
+//  .catch(function(err0r) {
+//    console.log("Something went wrong!");
+//  });
+//}
 </script>
 </body>
 </html>
